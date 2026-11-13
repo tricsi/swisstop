@@ -7,9 +7,10 @@ type Props = {
   tournament: TournamentState;
   onContinue: () => void;
   onReset: () => void;
+  onClearResults: () => void;
 };
 
-export function ResultsStep({ tournament, onContinue, onReset }: Props) {
+export function ResultsStep({ tournament, onContinue, onReset, onClearResults }: Props) {
   const { t } = useI18n();
   const [confirmReset, setConfirmReset] = useState(false);
   const rows = useMemo(() => computeStandings(tournament.items, tournament.matches), [tournament]);
@@ -85,6 +86,11 @@ export function ResultsStep({ tournament, onContinue, onReset }: Props) {
           onReset();
         }}
         onCancel={() => setConfirmReset(false)}
+        secondaryLabel={t.keepListConfirm}
+        onSecondary={() => {
+          setConfirmReset(false);
+          onClearResults();
+        }}
       />
     </section>
   );

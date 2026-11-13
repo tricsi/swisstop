@@ -466,3 +466,9 @@ button.primary.danger {
   padding: 6px 12px;
   color: var(--muted);
 }
+
+/* Three-choice popups: full-width buttons, main action on top. */
+dialog.confirm .actions.stacked {
+  flex-direction: column-reverse;
+  align-items: stretch;
+}

@@ -55,8 +55,10 @@ const en = {
   byeNote: (n: number) => `+${n} bye${n === 1 ? '' : 's'}`,
   startOver: 'Start over',
   startOverTitle: 'Start over?',
-  startOverMessage: "This deletes all items and comparisons and takes you back to the first step. It can't be undone.",
-  startOverConfirm: 'Delete and start over',
+  startOverMessage:
+    "Keep the list to compare its items again from scratch, or delete everything. Both take you back to the first step and can't be undone.",
+  startOverConfirm: 'Delete everything',
+  keepListConfirm: 'Keep list, delete results',
   cancel: 'Cancel',
 
   exportJson: 'Export JSON',
@@ -129,8 +131,10 @@ const hu: Messages = {
   byeNote: (n) => `+${n} erőnyerés`,
   startOver: 'Újrakezdés',
   startOverTitle: 'Újrakezded?',
-  startOverMessage: 'Ez törli az összes elemet és összehasonlítást, és visszavisz az első lépéshez. Nem vonható vissza.',
-  startOverConfirm: 'Törlés és újrakezdés',
+  startOverMessage:
+    'Megtarthatod a listát, hogy elölről hasonlítsd össze az elemeit, vagy törölhetsz mindent. Mindkettő visszavisz az első lépéshez, és nem vonható vissza.',
+  startOverConfirm: 'Minden törlése',
+  keepListConfirm: 'Lista megtartása, eredmények törlése',
   cancel: 'Mégse',
 
   exportJson: 'JSON exportálása',
@@ -204,8 +208,9 @@ const de: Messages = {
   startOver: 'Neu beginnen',
   startOverTitle: 'Neu beginnen?',
   startOverMessage:
-    'Dadurch werden alle Einträge und Vergleiche gelöscht und du kehrst zum ersten Schritt zurück. Das kann nicht rückgängig gemacht werden.',
-  startOverConfirm: 'Löschen und neu beginnen',
+    'Behalte die Liste, um ihre Einträge von vorn zu vergleichen, oder lösche alles. Beides führt zum ersten Schritt zurück und kann nicht rückgängig gemacht werden.',
+  startOverConfirm: 'Alles löschen',
+  keepListConfirm: 'Liste behalten, Ergebnisse löschen',
   cancel: 'Abbrechen',
 
   exportJson: 'JSON exportieren',

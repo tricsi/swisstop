@@ -9,10 +9,23 @@ type Props = {
   danger?: boolean;
   onConfirm: () => void;
   onCancel: () => void;
+  /** Optional extra, non-destructive choice shown between Cancel and the main button. */
+  secondaryLabel?: string;
+  onSecondary?: () => void;
 };
 
 /** In-page confirmation popup (native window.confirm is blocked in some embedded browsers). */
-export function ConfirmDialog({ open, title, message, confirmLabel, danger, onConfirm, onCancel }: Props) {
+export function ConfirmDialog({
+  open,
+  title,
+  message,
+  confirmLabel,
+  danger,
+  onConfirm,
+  onCancel,
+  secondaryLabel,
+  onSecondary,
+}: Props) {
   const { t } = useI18n();
   const ref = useRef<HTMLDialogElement>(null);
 
@@ -40,10 +53,15 @@ export function ConfirmDialog({ open, title, message, confirmLabel, danger, onCo
     >
       <h2 id="confirm-title">{title}</h2>
       <p>{message}</p>
-      <div className="actions">
+      <div className={secondaryLabel ? 'actions stacked' : 'actions'}>
         <button type="button" autoFocus onClick={onCancel}>
           {t.cancel}
         </button>
+        {secondaryLabel && onSecondary && (
+          <button type="button" onClick={onSecondary}>
+            {secondaryLabel}
+          </button>
+        )}
         <button type="button" className={danger ? 'primary danger' : 'primary'} onClick={onConfirm}>
           {confirmLabel}
         </button>

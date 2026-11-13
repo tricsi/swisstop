@@ -20,6 +20,7 @@ export type Action =
   | { type: 'undo' }
   | { type: 'goTo'; step: Step }
   | { type: 'reset' }
+  | { type: 'clearResults' }
   | { type: 'load'; data: ImportedData };
 
 const STORAGE_KEY = 'swiss-toplist-v1';
@@ -56,6 +57,9 @@ function reducer(state: AppState, action: Action): AppState {
       return { ...state, step: action.step };
     case 'reset':
       return initialState;
+    case 'clearResults':
+      // Keep the items, drop all comparisons, back to the first step.
+      return { ...initialState, items: state.items };
     case 'load':
       return { ...action.data, history: [] };
   }

@@ -53,6 +53,7 @@ export default function App() {
           tournament={tournament}
           onContinue={() => goTo('duel')}
           onReset={() => dispatch({ type: 'reset' })}
+          onClearResults={() => dispatch({ type: 'clearResults' })}
         />
       )}
 
