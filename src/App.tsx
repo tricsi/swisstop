@@ -36,6 +36,7 @@ export default function App() {
           items={items}
           started={tournament !== null}
           onAdd={(name) => dispatch({ type: 'addItem', name })}
+          onAddMany={(names) => dispatch({ type: 'addItems', names })}
           onRemove={(id) => dispatch({ type: 'removeItem', id })}
           onStart={() => dispatch({ type: 'start' })}
           onContinue={() => goTo('duel')}

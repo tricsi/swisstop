@@ -14,6 +14,7 @@ export type AppState = {
 
 export type Action =
   | { type: 'addItem'; name: string }
+  | { type: 'addItems'; names: string[] }
   | { type: 'removeItem'; id: string }
   | { type: 'start' }
   | { type: 'pick'; winnerId: string }
@@ -35,6 +36,19 @@ function reducer(state: AppState, action: Action): AppState {
       if (!name || state.items.some((i) => i.name.toLowerCase() === name.toLowerCase())) return state;
       // Changing the list invalidates any tournament in progress.
       return { ...state, items: [...state.items, { id: newId(), name }], tournament: null, history: [] };
+    }
+    case 'addItems': {
+      // Bulk add: skip blanks and names already on the list (or repeated in the batch).
+      const seen = new Set(state.items.map((i) => i.name.toLowerCase()));
+      const added: Item[] = [];
+      for (const raw of action.names) {
+        const name = raw.trim();
+        if (!name || seen.has(name.toLowerCase())) continue;
+        seen.add(name.toLowerCase());
+        added.push({ id: newId(), name });
+      }
+      if (added.length === 0) return state;
+      return { ...state, items: [...state.items, ...added], tournament: null, history: [] };
     }
     case 'removeItem':
       return { ...state, items: state.items.filter((i) => i.id !== action.id), tournament: null, history: [] };

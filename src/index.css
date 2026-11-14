@@ -472,3 +472,30 @@ dialog.confirm .actions.stacked {
   flex-direction: column-reverse;
   align-items: stretch;
 }
+
+/* Import list popup */
+dialog.import-list {
+  width: min(480px, calc(100vw - 32px));
+  max-width: none;
+}
+
+dialog.import-list textarea {
+  display: block;
+  width: 100%;
+  margin-top: 16px;
+  font: inherit;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  resize: vertical;
+}
+
+dialog.import-list textarea[aria-invalid='true'] {
+  border-color: var(--danger);
+}
+
+dialog.import-list .actions {
+  margin-top: 16px;
+}

@@ -19,6 +19,17 @@ const en = {
   itemPlaceholder: 'e.g. Pizza',
   itemNameLabel: 'Item name',
   add: 'Add',
+  importList: 'Import list',
+  importListTitle: 'Import a list',
+  importListHint: 'Paste or type one item per line. Empty lines are ignored.',
+  importListPlaceholder: 'Pizza\nSushi\nTacos',
+  importListConfirm: (n: number) => (n > 0 ? `Add ${n} item${n === 1 ? '' : 's'}` : 'Add items'),
+  importListDuplicates: (n: number) =>
+    `${n} duplicate line${n === 1 ? '' : 's'} will be skipped.`,
+  importListTooLong: (max: number, n: number) =>
+    `${n} line${n === 1 ? ' is' : 's are'} longer than ${max} characters. Shorten ${n === 1 ? 'it' : 'them'} to import.`,
+  importListTooMany: (max: number) => `Too many lines — at most ${max} items can be imported at once.`,
+  importListNothingNew: 'There is nothing new to add.',
   duplicate: (name: string) => `“${name}” is already on the list.`,
   noItems: 'No items yet. Add at least two to start comparing.',
   remove: (name: string) => `Remove ${name}`,
@@ -95,6 +106,15 @@ const hu: Messages = {
   itemPlaceholder: 'pl. Pizza',
   itemNameLabel: 'Elem neve',
   add: 'Hozzáadás',
+  importList: 'Lista importálása',
+  importListTitle: 'Lista importálása',
+  importListHint: 'Illessz be vagy írj be soronként egy elemet. Az üres sorok kimaradnak.',
+  importListPlaceholder: 'Pizza\nSushi\nTaco',
+  importListConfirm: (n) => (n > 0 ? `${n} elem hozzáadása` : 'Elemek hozzáadása'),
+  importListDuplicates: (n) => `${n} ismétlődő sor kimarad.`,
+  importListTooLong: (max, n) => `${n} sor hosszabb ${max} karakternél. Rövidítsd le az importáláshoz.`,
+  importListTooMany: (max) => `Túl sok sor – egyszerre legfeljebb ${max} elem importálható.`,
+  importListNothingNew: 'Nincs új hozzáadható elem.',
   duplicate: (name) => `„${name}” már szerepel a listán.`,
   noItems: 'Még nincs elem. Adj hozzá legalább kettőt az összehasonlítás indításához.',
   remove: (name) => `${name} eltávolítása`,
@@ -170,6 +190,22 @@ const de: Messages = {
   itemPlaceholder: 'z. B. Pizza',
   itemNameLabel: 'Name des Eintrags',
   add: 'Hinzufügen',
+  importList: 'Liste importieren',
+  importListTitle: 'Liste importieren',
+  importListHint: 'Füge pro Zeile einen Eintrag ein. Leere Zeilen werden ignoriert.',
+  importListPlaceholder: 'Pizza\nSushi\nTacos',
+  importListConfirm: (n) =>
+    n === 0 ? 'Einträge hinzufügen' : n === 1 ? '1 Eintrag hinzufügen' : `${n} Einträge hinzufügen`,
+  importListDuplicates: (n) =>
+    n === 1
+      ? '1 doppelte Zeile wird übersprungen.'
+      : `${n} doppelte Zeilen werden übersprungen.`,
+  importListTooLong: (max, n) =>
+    n === 1
+      ? `1 Zeile ist länger als ${max} Zeichen. Kürze sie, um zu importieren.`
+      : `${n} Zeilen sind länger als ${max} Zeichen. Kürze sie, um zu importieren.`,
+  importListTooMany: (max) => `Zu viele Zeilen – höchstens ${max} Einträge auf einmal.`,
+  importListNothingNew: 'Es gibt nichts Neues hinzuzufügen.',
   duplicate: (name) => `„${name}“ ist bereits in der Liste.`,
   noItems: 'Noch keine Einträge. Füge mindestens zwei hinzu, um mit dem Vergleichen zu beginnen.',
   remove: (name) => `${name} entfernen`,

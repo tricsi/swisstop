@@ -2,22 +2,28 @@ import { useState, type FormEvent } from 'react';
 import { useI18n } from '../i18n/context';
 import type { Item } from '../swiss';
 import { ConfirmDialog } from './ConfirmDialog';
+import { ImportListDialog } from './ImportListDialog';
 
-type PendingChange = { kind: 'add'; name: string } | { kind: 'remove'; id: string };
+type PendingChange =
+  | { kind: 'add'; name: string }
+  | { kind: 'addMany'; names: string[] }
+  | { kind: 'remove'; id: string };
 
 type Props = {
   items: Item[];
   started: boolean;
   onAdd: (name: string) => void;
+  onAddMany: (names: string[]) => void;
   onRemove: (id: string) => void;
   onStart: () => void;
   onContinue: () => void;
 };
 
-export function SetupStep({ items, started, onAdd, onRemove, onStart, onContinue }: Props) {
+export function SetupStep({ items, started, onAdd, onAddMany, onRemove, onStart, onContinue }: Props) {
   const { t } = useI18n();
   const [name, setName] = useState('');
   const [pending, setPending] = useState<PendingChange | null>(null);
+  const [importing, setImporting] = useState(false);
   const trimmed = name.trim();
   const duplicate = items.some((i) => i.name.toLowerCase() === trimmed.toLowerCase());
 
@@ -25,6 +31,8 @@ export function SetupStep({ items, started, onAdd, onRemove, onStart, onContinue
     if (change.kind === 'add') {
       onAdd(change.name);
       setName('');
+    } else if (change.kind === 'addMany') {
+      onAddMany(change.names);
     } else {
       onRemove(change.id);
     }
@@ -53,6 +61,9 @@ export function SetupStep({ items, started, onAdd, onRemove, onStart, onContinue
         />
         <button type="submit" disabled={!trimmed || duplicate}>
           {t.add}
+        </button>
+        <button type="button" onClick={() => setImporting(true)}>
+          {t.importList}
         </button>
       </form>
       {duplicate && trimmed && <p className="hint error">{t.duplicate(trimmed)}</p>}
@@ -88,6 +99,16 @@ export function SetupStep({ items, started, onAdd, onRemove, onStart, onContinue
           </button>
         )}
       </div>
+
+      <ImportListDialog
+        open={importing}
+        items={items}
+        onImport={(names) => {
+          setImporting(false);
+          request({ kind: 'addMany', names });
+        }}
+        onCancel={() => setImporting(false)}
+      />
 
       <ConfirmDialog
         open={pending !== null}
