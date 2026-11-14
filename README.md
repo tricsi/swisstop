@@ -19,3 +19,7 @@ Requires Node 18+ (pinned to 22 via Volta).
 ## Import / export
 
 Below every step, **Export JSON** downloads the items and comparisons (`toplist-YYYY-MM-DD.json`; undo history is not included). **Import JSON** loads such a file — or a plain JSON array of names like `["Pizza", "Sushi"]` — after asking before it replaces existing data. Files are validated; broken or foreign files show an error and change nothing.
+
+## Deploy
+
+`.github/workflows/deploy.yml` lints, tests, builds and publishes `dist/` to GitHub Pages on every push to `master` (or manually via *Run workflow*). One-time setup: in the repo's **Settings → Pages**, set **Source** to **GitHub Actions**. The build uses relative asset paths (`base: './'` in `vite.config.ts`), so it works at `https://<user>.github.io/<repo>/` and on a custom domain.
